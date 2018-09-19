@@ -9,9 +9,11 @@ const requestParser = module.exports = {};
 requestParser.parseAsync = (request) => {
   return new Promise((resolve, reject) => {
     logger.log(logger.INFO, `Original URL: ${request.url}`);
+
     if (request.method !== 'POST' && request.method !== 'PUT') {
       return resolve(request);
     }
+
     let completeBody = '';
 
     request.on('data', (buffer) => {

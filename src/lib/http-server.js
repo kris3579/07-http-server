@@ -57,6 +57,6 @@ server.start = (port) => {
   });
 };
 
-server.stop = (callback) => {
-
+server.stop = (port, callback) => {
+  logger.log(logger.INFO, `Server on PORT: ${port} stopped`);
 };

@@ -19,5 +19,9 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^21.22.0",
     "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "http": "0.0.0",
+    "winston": "^3.1.0"
   }
 }
