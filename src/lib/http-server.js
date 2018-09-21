@@ -1,15 +1,16 @@
 'use strict';
 
 const http = require('http');
+const cowSay = require('cowsay');
 const logger = require('./logger');
-const requestParser = require('./request-parser');
+const requestParser = require('./request-parser')
 
 const app = http.createServer((request, response) => {
   logger.log(logger.INFO, 'New Request');
   logger.log(logger.INFO, `METHOD: ${request.method}`);
   logger.log(logger.INFO, `ROUTE: ${request.url}`);
 
-  return requestParser.parseAsynch(request)
+  return requestParser.parseAsync(request)
     .then((parsedRequest) => {
       if (parsedRequest.method === 'GET' && parsedRequest.url === '/') {
         response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -17,8 +18,22 @@ const app = http.createServer((request, response) => {
 
         response.write(`
         <!DOCTYPE html>
-            <head>Head</head>
-            <body>This is the body</body>
+        <html>
+          <head>
+            <title> cowsay </title>  
+          </head>
+          <body>
+           <header>
+             <nav>
+               <ul> 
+                 <li><a href="/cowsay">cowsay</a></li>
+               </ul>
+             </nav>
+           <header>
+           <main>
+             <!-- Make the cow speak. -->
+           </main>
+          </body>
         </html>
         `);
 
@@ -26,10 +41,10 @@ const app = http.createServer((request, response) => {
         return null;
       }
 
-      if (parsedRequest.method === 'POST' && parsedRequest.url === '/message') {
+      if (parsedRequest.method === 'POST' && parsedRequest.url === '/api/cowsay') {
         response.writeHead(200, { 'Content-Type': 'application/json' });
         logger.log(logger.INFO, 'Responding with 200 and JSON doc');
-        response.write('string');
+        response.write(JSON.stringify(cowSay.say({ text: 'The cow Speaks' })));
         response.end();
         return null;
       }
@@ -57,6 +72,6 @@ server.start = (port) => {
   });
 };
 
-server.stop = (port, callback) => {
-  logger.log(logger.INFO, `Server on PORT: ${port} stopped`);
-};
+// server.stop = (port, callback) => {
+//   logger.log(logger.INFO, `Server on PORT: ${port} stopped`);
+// };
