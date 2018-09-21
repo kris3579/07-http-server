@@ -31,4 +31,4 @@ MIT
 
 ### Travis
 
-https://travis-ci.com/kris3579/07-http-server.svg?branch=master
+[![Build Status](https://travis-ci.com/kris3579/07-http-server.svg?branch=master)](https://travis-ci.com/kris3579/07-http-server)
